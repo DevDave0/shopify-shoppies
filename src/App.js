@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MovieList from './components/MovieList';
 
 
 const exampleKey = "http://www.omdbapi.com/?i=tt3896198&apikey=4ccaac08"
@@ -32,7 +33,11 @@ const App = () => {
   },
   ])
 
-  return <div>hello</div>;
+  return (
+    <div>
+      <MovieList movies={movies} />
+    </div>
+  );
 }
 
 export default App;
