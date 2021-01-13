@@ -11,19 +11,21 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
-  const getMovieRequest = () => {
-    const url = 'http://omdbapi.com/?s=star%20wars&apikey=4ccaac08'
+  const getMovieRequest = (searchValue) => {
+    const url = `http://omdbapi.com/?s=${searchValue}&apikey=4ccaac08`
 
     fetch(url)
     .then(resp => resp.json())
     .then(movies => {
-      setMovies(movies.Search)
+      if (movies.Search) {
+        setMovies(movies.Search)
+      }
     })
   }
 
   useEffect(() => {
-    getMovieRequest();
-  }, []);
+    getMovieRequest(searchValue);
+  }, [searchValue]);
 
   return (
     <div className='container-fluid movie-app'>
