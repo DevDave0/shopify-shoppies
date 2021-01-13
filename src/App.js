@@ -5,6 +5,7 @@ import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddNomination from './components/AddNomination'
+import RemoveNomination from './components/RemoveNomination'
 
 
 const App = () => {
@@ -34,6 +35,13 @@ const App = () => {
     setNomination(newNominationList);
   }
 
+  const removeNominatedMovie = (movie) => {
+    const newNominationList = nomination.filter(
+      (nomination) => nomination.imdbID !== movie.imdbID
+    );
+    setNomination(newNominationList);
+  }
+
   return (
     <div className='container-fluid movie-app'>
       <div className='row d-flex align-items-center mt-4 mb-4'>
@@ -48,7 +56,7 @@ const App = () => {
         <MovieListHeading heading="Nominations" />
       </div>
       <div className='row'>
-        <MovieList movies={nomination} handleNominationClick={addNominatedMovie} nominationComponent={AddNomination} />
+        <MovieList movies={nomination} handleNominationClick={removeNominatedMovie} nominationComponent={RemoveNomination} />
       </div>
     </div>
   );
