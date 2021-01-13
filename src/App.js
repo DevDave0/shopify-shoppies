@@ -4,11 +4,13 @@ import './App.css';
 import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
+import AddNomination from './components/AddNomination'
 
 
 const App = () => {
 
   const [movies, setMovies] = useState([]);
+  const [nomination, setNomination] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = (searchValue) => {
@@ -27,6 +29,11 @@ const App = () => {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
+  const addNominatedMovie = (movie) => {
+    const newNominationList = [...nomination, movie];
+    setNomination(newNominationList);
+  }
+
   return (
     <div className='container-fluid movie-app'>
       <div className='row d-flex align-items-center mt-4 mb-4'>
@@ -34,7 +41,14 @@ const App = () => {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className='row'>
-        <MovieList movies={movies} />
+        <MovieList movies={movies} handleNominationClick={addNominatedMovie} nominationComponent={AddNomination} />
+      </div>
+
+      <div className='row d-flex align-items-center mt-4 mb-4'>
+        <MovieListHeading heading="Nominations" />
+      </div>
+      <div className='row'>
+        <MovieList movies={nomination} handleNominationClick={addNominatedMovie} nominationComponent={AddNomination} />
       </div>
     </div>
   );
