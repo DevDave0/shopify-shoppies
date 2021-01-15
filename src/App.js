@@ -30,9 +30,14 @@ const App = () => {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem('react-movie-app-nominations', JSON.stringify(items))
+  }
+
   const addNominatedMovie = (movie) => {
     const newNominationList = [...nomination, movie];
     setNomination(newNominationList);
+    saveToLocalStorage(newNominationList)
   }
 
   const removeNominatedMovie = (movie) => {
