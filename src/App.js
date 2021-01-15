@@ -41,8 +41,11 @@ const App = () => {
 
   const addNominatedMovie = (movie) => {
     const newNominationList = [...nomination, movie];
-    setNomination(newNominationList);
-    saveToLocalStorage(newNominationList)
+    if (!nomination.includes(movie)){
+      setNomination(newNominationList);
+      saveToLocalStorage(newNominationList)
+
+    } 
   }
 
   const removeNominatedMovie = (movie) => {
@@ -55,10 +58,14 @@ const App = () => {
 
   return (
     <div className='container-fluid movie-app'>
+      <h1 className='title'>The Shoppies</h1>
       <div className='row d-flex align-items-center mt-4 mb-4'>
-        <MovieListHeading heading="Movies" />
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
+      <div className='row d-flex align-items-center mt-4 mb-4'>
+        <MovieListHeading heading="Movies" />
+      </div>
+      {(movies.length === 0) ? <h3 className=''>Please type a movie title in the search box above</h3> : console.log('not 5')}
       <div className='row'>
         <MovieList movies={movies} handleNominationClick={addNominatedMovie} nominationComponent={AddNomination} />
       </div>
@@ -66,6 +73,7 @@ const App = () => {
       <div className='row d-flex align-items-center mt-4 mb-4'>
         <MovieListHeading heading="Nominations" />
       </div>
+      {(nomination.length >= 5) ? <h3 className=''>You have nominated {nomination.length} movies!</h3> : console.log('not 5')}
       <div className='row'>
         <MovieList movies={nomination} handleNominationClick={removeNominatedMovie} nominationComponent={RemoveNomination} />
       </div>
