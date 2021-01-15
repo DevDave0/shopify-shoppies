@@ -50,6 +50,7 @@ const App = () => {
       (nomination) => nomination.imdbID !== movie.imdbID
     );
     setNomination(newNominationList);
+    saveToLocalStorage(newNominationList);
   }
 
   return (
