@@ -65,7 +65,7 @@ const App = () => {
       <div className='row d-flex align-items-center mt-4 mb-4'>
         <MovieListHeading heading="Movies" />
       </div>
-      {(movies.length === 0) ? <h3 className=''>Please type a movie title in the search box above</h3> : console.log('not 5')}
+      {(movies.length === 0) ? <h3 className=''>Please enter a movie title in the search box above</h3> : console.log('not 5')}
       <div className='row'>
         <MovieList movies={movies} handleNominationClick={addNominatedMovie} nominationComponent={AddNomination} />
       </div>
