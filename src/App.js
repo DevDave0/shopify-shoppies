@@ -30,6 +30,11 @@ const App = () => {
     getMovieRequest(searchValue);
   }, [searchValue]);
 
+  useEffect(() => {
+    const movieNominations = JSON.parse(localStorage.getItem('react-movie-app-nominations'));
+    setNomination(movieNominations)
+  }, []);
+
   const saveToLocalStorage = (items) => {
     localStorage.setItem('react-movie-app-nominations', JSON.stringify(items))
   }
